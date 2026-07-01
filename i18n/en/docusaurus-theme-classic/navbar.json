@@ -1,0 +1,27 @@
+{
+  "title": {
+    "message": "APE Bridge",
+    "description": "The title in the navbar"
+  },
+  "item.label.Documentation": {
+    "message": "Documentation"
+  },
+  "item.label.Welcome": {
+    "message": "Welcome"
+  },
+  "item.label.Setup": {
+    "message": "Setup"
+  },
+  "item.label.Architecture": {
+    "message": "Architecture"
+  },
+  "item.label.Galerie": {
+    "message": "Gallery"
+  },
+  "item.label.Ressources": {
+    "message": "Resources"
+  },
+  "item.label.GitHub": {
+    "message": "GitHub"
+  }
+}

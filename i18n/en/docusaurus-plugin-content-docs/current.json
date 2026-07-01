@@ -1,0 +1,26 @@
+{
+  "sidebar.docsSidebar.category.Setup": {
+    "message": "Setup"
+  },
+  "sidebar.docsSidebar.category.Architecture": {
+    "message": "Architecture"
+  },
+  "sidebar.docsSidebar.category.Référence": {
+    "message": "Reference"
+  },
+  "sidebar.docsSidebar.doc.Welcome": {
+    "message": "Welcome"
+  },
+  "sidebar.docsSidebar.doc.Galerie": {
+    "message": "Gallery"
+  },
+  "sidebar.docsSidebar.doc.Intégration TCAD": {
+    "message": "TCAD Integration"
+  },
+  "sidebar.docsSidebar.doc.Ressources": {
+    "message": "Resources"
+  },
+  "sidebar.docsSidebar.doc.Contribution": {
+    "message": "Contributing"
+  }
+}

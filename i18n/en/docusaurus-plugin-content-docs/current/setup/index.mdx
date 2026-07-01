@@ -1,0 +1,29 @@
+---
+sidebar_position: 1
+slug: /setup
+title: Setup
+---
+
+import SetupCards from '@site/src/components/SetupCards';
+
+# Setup
+
+This section covers everything you need to **install**, **use**, **troubleshoot** and **optimize** The APE Bridge.
+
+Choose a card below to access the corresponding guide:
+
+<SetupCards />
+
+## Quick prerequisites
+
+| Component | Minimum version |
+|-----------|-----------------|
+| Python | 3.10+ |
+| Quantum ESPRESSO | 7.0+ (`pw.x`, `epsilon.x`) |
+| MPI | OpenMPI or MPICH (recommended) |
+| Disk space | ~20 GiB for full runs |
+| API key | `MP_API_KEY` for Materials Project |
+
+:::tip Docker
+If you prefer to avoid manual QE installation, see the [Docker](/docs/setup/installation#docker-option) section in the installation guide.
+:::

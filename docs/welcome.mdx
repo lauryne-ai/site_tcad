@@ -1,0 +1,71 @@
+---
+sidebar_position: 1
+slug: /welcome
+title: Welcome
+---
+
+# Bienvenue sur The APE Bridge
+
+**The APE Bridge** (Automated Pipeline for Extracting dielectric properties) est un pipeline qui transforme les simulations quantiques **Quantum ESPRESSO** en données exploitables pour les simulateurs de dispositifs **TCAD** (Technology Computer-Aided Design).
+
+## Pourquoi ce projet ?
+
+Les ingénieurs et chercheurs en microélectronique ont besoin de propriétés matériaux précises — constante diélectrique, gap de bande, masses effectives — pour simuler des dispositifs. Obtenir ces données depuis la DFT (Density Functional Theory) avec Quantum ESPRESSO implique habituellement :
+
+- Télécharger manuellement structures et pseudopotentiels
+- Rédiger et ajuster des fichiers d'entrée `.in`
+- Lancer SCF, NSCF et `epsilon.x` séparément
+- Vérifier la convergence (ecut, k-points, maille)
+- Parser les sorties et formater pour TCAD
+
+**The APE Bridge automatise l'ensemble de ce flux** et garantit la cohérence physique des résultats.
+
+## Pour qui ?
+
+- **Chercheurs en science des matériaux** souhaitant extraire ε(ω) depuis la DFT
+- **Ingénieurs dispositifs** préparant des modèles pour Sentaurus, Silvaco ou DEVSIM
+- **Utilisateurs Quantum ESPRESSO** cherchant un workflow reproductible QE → TCAD
+
+## Ce que vous obtenez
+
+| Livrable | Description |
+|----------|-------------|
+| **JSON TCAD-ready** | Bandgap, masses effectives, ε₀, ω_p dans `parsed_data/` |
+| **Plots 300 DPI** | Courbes de dispersion diélectrique publication-ready |
+| **Convergence automatisée** | ecut, k-points et maille optimisés automatiquement |
+| **Recovery** | Reprise après interruption de calcul |
+
+## Quick Start
+
+```bash
+# 1. Cloner et installer
+git clone https://github.com/LauryneEklou/QE_to_TCAD.git
+cd QE_to_TCAD
+python3 -m venv .venv && source .venv/bin/activate
+pip install -e .
+
+# 2. Lancer le pipeline (exemple : Carbone)
+qe-bridge C
+
+# 3. Visualiser la fonction diélectrique
+python3 plotter.py epsilon_out/C_epsr.dat
+```
+
+## Flux global
+
+```mermaid
+flowchart LR
+    MP[Materials Project] --> Fetcher[fetcher.py]
+    Fetcher --> Gen[Génération inputs QE]
+    Gen --> SCF[SCF / NSCF]
+    SCF --> Eps[epsilon.x]
+    Eps --> JSON[parsed_data/*.json]
+    JSON --> TCAD[Simulateurs TCAD]
+    Eps --> Plots[plotter.py]
+```
+
+## Prochaines étapes
+
+- [Installation](/docs/setup/installation) — configurer Python, QE et MPI
+- [Utilisation](/docs/setup/usage) — lancer votre premier calcul
+- [Architecture](/docs/architecture/overview) — comprendre le pipeline en détail

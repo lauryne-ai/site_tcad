@@ -1,0 +1,35 @@
+{
+  "link.title.Documentation": {
+    "message": "Documentation"
+  },
+  "link.item.label.Welcome": {
+    "message": "Welcome"
+  },
+  "link.item.label.Installation": {
+    "message": "Installation"
+  },
+  "link.item.label.Architecture": {
+    "message": "Architecture"
+  },
+  "link.title.Communauté": {
+    "message": "Community"
+  },
+  "link.item.label.GitHub Issues": {
+    "message": "GitHub Issues"
+  },
+  "link.item.label.Quantum ESPRESSO": {
+    "message": "Quantum ESPRESSO"
+  },
+  "link.title.Plus": {
+    "message": "More"
+  },
+  "link.item.label.Référence CLI": {
+    "message": "CLI Reference"
+  },
+  "link.item.label.Contribution": {
+    "message": "Contributing"
+  },
+  "copyright": {
+    "message": "Copyright © 2026 The APE Bridge — MIT License"
+  }
+}

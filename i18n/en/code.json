@@ -1,0 +1,50 @@
+{
+  "homepage.cta.welcome": {
+    "message": "Discover the project"
+  },
+  "homepage.cta.setup": {
+    "message": "Start installation"
+  },
+  "homepage.feature.automation.title": {
+    "message": "Full automation"
+  },
+  "homepage.feature.automation.desc": {
+    "message": "From crystal structure (Materials Project) to QE files, SCF/NSCF/epsilon calculations and JSON export — without manual intervention."
+  },
+  "homepage.feature.dielectric.title": {
+    "message": "Dielectric extraction"
+  },
+  "homepage.feature.dielectric.desc": {
+    "message": "Static dielectric constant ε₀, plasma frequencies ω_p and full ε(ω) dispersion, ready for device engineering."
+  },
+  "homepage.feature.tcad.title": {
+    "message": "Native TCAD export"
+  },
+  "homepage.feature.tcad.desc": {
+    "message": "Structured JSON compatible with Sentaurus, Silvaco and DEVSIM workflows for 1D device validation."
+  },
+  "setup.cards.installation.title": {
+    "message": "Installation"
+  },
+  "setup.cards.installation.desc": {
+    "message": "Python, Quantum ESPRESSO, MPI and Docker option to get started quickly."
+  },
+  "setup.cards.usage.title": {
+    "message": "Usage"
+  },
+  "setup.cards.usage.desc": {
+    "message": "Run the pipeline, visualize results and export to TCAD."
+  },
+  "setup.cards.troubleshooting.title": {
+    "message": "Common errors"
+  },
+  "setup.cards.troubleshooting.desc": {
+    "message": "Common symptoms, likely causes and step-by-step solutions."
+  },
+  "setup.cards.optimization.title": {
+    "message": "Optimization"
+  },
+  "setup.cards.optimization.desc": {
+    "message": "Convergence, MPI, k-points and settings to speed up calculations."
+  }
+}

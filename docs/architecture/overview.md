@@ -1,0 +1,81 @@
+---
+sidebar_position: 1
+title: Vue d'ensemble
+---
+
+# Architecture du pipeline
+
+The APE Bridge orchestre un flux complet depuis la **base de données Materials Project** jusqu'à l'**export TCAD**, en passant par Quantum ESPRESSO.
+
+## Flux de données
+
+```mermaid
+flowchart LR
+    MP[MaterialsProject] --> Fetcher[fetcher.py]
+    Fetcher --> Gen[qe_input_generator]
+    Gen --> Runner[qe_runner.py]
+    Runner --> Conv[convergence_manager]
+    Conv --> Eps[epsilon.x]
+    Eps --> Parse[parse_tcad_parameters]
+    Parse --> JSON[parsed_data/*.json]
+    JSON --> TCAD[Sentaurus / DEVSIM]
+    Parse --> Plots[plotter.py]
+```
+
+## Étapes principales
+
+### 1. Acquisition de la structure
+
+- Requête à l'API **Materials Project** via la formule chimique (`Si`, `C`, `Ge`…)
+- Téléchargement de la structure cristalline la plus stable (CIF/POSCAR)
+- Téléchargement automatique des pseudopotentiels **ONCV-PBE** (bibliothèque SG15)
+
+### 2. Génération des entrées QE
+
+Le module `qe_input_generator.py` produit les fichiers `.in` pour :
+- Calcul SCF (auto-cohérence)
+- Calcul NSCF (bandes sur grille k dense)
+- Calcul `epsilon.x` (fonction diélectrique)
+
+### 3. Exécution et convergence
+
+`qe_runner.py` lance `pw.x` et `epsilon.x` avec MPI. Le `convergence_manager.py` optimise automatiquement ecut, k-points et maille.
+
+### 4. Extraction et export
+
+`parse_tcad_parameters.py` parse les sorties QE et produit un JSON structuré dans `parsed_data/`.
+
+### 5. Visualisation
+
+`plotter.py` et `plot_convergence.py` génèrent des figures terminal et PNG 300 DPI.
+
+## Points d'entrée
+
+| Commande | Rôle |
+|----------|------|
+| `qe-bridge <formule>` | Pipeline complet (recommandé) |
+| `python3 fetcher.py <formule>` | Orchestrateur direct |
+| `python3 convergence_manager.py` | Convergence seule |
+| `python3 qe_runner.py <fichier.in>` | Exécution QE bas niveau |
+
+## Arborescence du projet
+
+```
+QE_to_TCAD/
+├── fetcher.py              # Orchestrateur principal
+├── qe_input_generator.py   # Génération fichiers QE
+├── qe_runner.py            # Exécution pw.x / epsilon.x
+├── convergence_manager.py  # Convergence 4 phases
+├── parse_tcad_parameters.py# Export JSON TCAD
+├── plotter.py              # Graphiques diélectriques
+├── generated_inputs/       # Entrées QE (auto-généré)
+├── epsilon_out/            # Résultats epsilon.x
+├── parsed_data/            # JSON TCAD
+└── plots/                  # Figures PNG
+```
+
+## Voir aussi
+
+- [Physique du calcul](/docs/architecture/physics)
+- [Gestionnaire de convergence](/docs/architecture/convergence)
+- [Modules du projet](/docs/architecture/modules)

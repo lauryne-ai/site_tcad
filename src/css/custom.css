@@ -1,0 +1,65 @@
+/**
+ * APE Bridge — Royal Blue primary palette
+ */
+:root {
+  --ifm-color-primary: #4169e1;
+  --ifm-color-primary-dark: #3a5ecc;
+  --ifm-color-primary-darker: #3659c1;
+  --ifm-color-primary-darkest: #2c499f;
+  --ifm-color-primary-light: #5a7de5;
+  --ifm-color-primary-lighter: #6586e7;
+  --ifm-color-primary-lightest: #85a0ed;
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme='dark'] {
+  --ifm-color-primary: #6b8cff;
+  --ifm-color-primary-dark: #5a7de5;
+  --ifm-color-primary-darker: #5274e0;
+  --ifm-color-primary-darkest: #445fba;
+  --ifm-color-primary-light: #7c9aff;
+  --ifm-color-primary-lighter: #88a3ff;
+  --ifm-color-primary-lightest: #a8bcff;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}
+
+.setup-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.setup-card {
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: var(--ifm-card-border-radius);
+  padding: 1.5rem;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  text-decoration: none !important;
+  color: inherit !important;
+  display: block;
+  height: 100%;
+}
+
+.setup-card:hover {
+  box-shadow: var(--ifm-global-shadow-md);
+  transform: translateY(-2px);
+  border-color: var(--ifm-color-primary);
+}
+
+.setup-card__icon {
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+.setup-card__title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.setup-card__description {
+  color: var(--ifm-color-emphasis-700);
+  margin: 0;
+}
