@@ -8,9 +8,9 @@ const config: Config = {
   favicon: 'img/favicon.ico',
 
   url: 'https://lauryne-ai.github.io',
-  baseUrl: '/site_Tcad/',
+  baseUrl: '/site_tcad/',
   organizationName: 'lauryne-ai',
-  projectName: 'site_Tcad',
+  projectName: 'site_tcad',
   onBrokenLinks: 'throw',
 
   i18n: {
@@ -42,7 +42,7 @@ const config: Config = {
           sidebarPath: './sidebars.ts',
           routeBasePath: 'docs',
           editUrl:
-            'https://github.com/LauryneEklou/site_Tcad/tree/main/',
+            'https://github.com/lauryne-ai/site_tcad/tree/main/',
         },
         blog: false,
         theme: {

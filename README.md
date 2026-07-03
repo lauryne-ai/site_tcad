@@ -2,7 +2,7 @@
 
 Site de documentation utilisateur pour le projet [QE_to_TCAD](https://github.com/LauryneEklou/QE_to_TCAD), construit avec [Docusaurus](https://docusaurus.io/).
 
-**URL publique (après déploiement) :** [lauryneeklou.github.io/site_Tcad](https://lauryneeklou.github.io/site_Tcad/)
+**URL publique (après déploiement) :** [lauryne-ai.github.io/site_tcad](https://lauryne-ai.github.io/site_tcad/)
 
 ## Développement local
 
@@ -16,7 +16,7 @@ npm install
 npm run start:fr
 ```
 
-→ [http://localhost:3000/site_Tcad/](http://localhost:3000/site_Tcad/)
+→ [http://localhost:3000/site_tcad/](http://localhost:3000/site_tcad/)
 
 ### Anglais
 
@@ -24,7 +24,7 @@ npm run start:fr
 npm run start:en
 ```
 
-→ [http://localhost:3000/site_Tcad/en/](http://localhost:3000/site_Tcad/en/)
+→ [http://localhost:3000/site_tcad/en/](http://localhost:3000/site_tcad/en/)
 
 ### Important : menu de langue (FR ↔ EN)
 
@@ -36,7 +36,7 @@ Pour tester le changement de langue comme en production :
 npm run serve:prod
 ```
 
-Puis ouvrez [http://localhost:3000/site_Tcad/](http://localhost:3000/site_Tcad/) et utilisez le menu **Français / English** — cela fonctionnera.
+Puis ouvrez [http://localhost:3000/site_tcad/](http://localhost:3000/site_tcad/) et utilisez le menu **Français / English** — cela fonctionnera.
 
 Après un changement de config :
 
@@ -53,10 +53,12 @@ npm run serve
 
 ## Déploiement GitHub Pages
 
-1. Créer un dépôt GitHub `site_Tcad` et pousser ce dossier
-2. **Settings → Pages → Source : GitHub Actions**
-3. Le workflow `.github/workflows/deploy-docs.yml` déploie automatiquement à chaque push sur `main`
-4. Une fois déployé, le menu **Français / English** fonctionne sur le site en ligne
+1. Pousser ce dépôt sur `https://github.com/lauryne-ai/site_tcad`
+2. **Settings → Pages → Build and deployment → Source : Deploy from a branch**
+3. Choisir la branche **`gh-pages`**, dossier **`/ (root)`**, puis **Save**
+4. Le workflow `.github/workflows/deploy-docs.yml` pousse le build sur `gh-pages` à chaque push sur `main`
+5. URL finale : [https://lauryne-ai.github.io/site_tcad/](https://lauryne-ai.github.io/site_tcad/)
+6. Une fois déployé, le menu **Français / English** fonctionne sur le site en ligne
 
 ## Structure
 
