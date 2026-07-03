@@ -29,6 +29,7 @@ Liens utiles pour approfondir la DFT, Quantum ESPRESSO et l'ingénierie TCAD.
 
 - [Synopsys Sentaurus](https://www.synopsys.com/silicon/tcad.html) — documentation Sentaurus Device
 - [DEVSIM](https://devsim.org/) — simulateur open-source utilisé pour la validation 1D
+- [nanoHUB](https://nanohub.org/) — plateforme de simulation nanotechnologie ; nos sorties diode et transistor y ont été comparées pour validation
 
 ## Livres recommandés
 

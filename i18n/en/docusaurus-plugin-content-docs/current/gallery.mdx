@@ -1,0 +1,86 @@
+---
+sidebar_position: 6
+title: Gallery
+---
+
+# Galerie de résultats
+
+Exemples de sorties produites par The APE Bridge après un calcul complet.
+
+## Carbone (diamant, Fd-3m)
+
+**Propriétés extraites :**
+- ε₀ ≈ 6.74 (expérimental : 6.72)
+- ω_p ≈ 28.9 eV
+- Isotropie : |ε_x − ε_y| < 0.01 %
+- Zéro-crossing (fréquence plasma) à ~12.3 eV
+
+```
+Real Dielectric Function εᵣ(ω)
+        ┌────────────────────────────┐
+    20  │        ╱╲                  │
+    15  │      ╱    ╲╱╲              │
+    10  │    ╱          ╲    εₓ ─────│
+     5  │  ╱              ╲          │
+     0  │─────────────────── ─────────│
+    -5  │                     ╱       │
+        └────────────────────────────┘
+        0        10        20        30   Energy [eV]
+```
+
+Les figures PNG haute résolution sont générées dans `plots/` :
+
+```bash
+python3 plotter.py epsilon_out/C_epsr.dat
+# → plots/C_dielectric_dispersion.png
+```
+
+## Silicium (cubique, Fd-3m)
+
+Exemple de JSON exporté (`parsed_data/Si.json`) :
+
+| Propriété | Valeur calculée |
+|-----------|-----------------|
+| Gap de bande | 1.68 eV (indirect) |
+| ε₀ | ~15.9 |
+| m*_e | 0.12 m₀ |
+| m*_h | 0.85 m₀ |
+
+## Matériaux en cours / disponibles
+
+| Matériau | Structure | Statut |
+|----------|-----------|--------|
+| C | Diamant (Fd-3m) | ✓ Validé |
+| Si | Cubique (Fd-3m) | ✓ Disponible |
+| Ge | Cubique (Fd-3m) | ✓ Disponible |
+| SiGe | Alliage | ✓ Disponible |
+| Fe | Métal | ✓ Disponible |
+| Zn | Hexagonal (P6₃/mmc) | En cours |
+| Graphène | 2D | En cours |
+
+Consultez le dossier [`parsed_data/`](https://github.com/LauryneEklou/QE_to_TCAD/tree/main/parsed_data) du dépôt pour les JSON complets.
+
+## Courbes de convergence
+
+```bash
+python3 plot_convergence_progressive.py convergence_data/Si_convergence.json
+```
+
+Produit des graphiques montrant l'évolution de l'énergie totale et du gap en fonction de `ecutwfc` et des k-points.
+
+## Validation TCAD
+
+```bash
+python3 plot_complet.py parsed_data/SiGe.json diode
+# → validation_diode_SiGe.png
+```
+
+## Reproduire ces résultats
+
+```bash
+qe-bridge C
+qe-bridge Si
+python3 plotter.py epsilon_out/Si_epsr.dat
+```
+
+Voir [Utilisation](/docs/setup/usage) pour le guide complet.

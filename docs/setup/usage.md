@@ -120,7 +120,7 @@ Voir [Intégration TCAD](/docs/tcad-integration) pour plus de détails.
 qe-bridge Si --pw /path/to/pw.x --nproc 4
 
 # Mode léger (moins de k-points, pour tests)
-python3 fetcher.py C --light
+python3 fetcher.py C --light_mode
 ```
 
 ## Voir aussi

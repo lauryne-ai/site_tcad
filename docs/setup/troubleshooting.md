@@ -18,6 +18,7 @@ Ce guide regroupe les problèmes les plus courants, leurs causes et leurs soluti
 | Pas de graphiques terminal | `plotext`/`matplotlib` absents ou cache Python | [Graphiques manquants](#graphiques-manquants) |
 | `pw.x` exit code 1 (Docker) | QE incomplet dans l'image | [Docker](#docker) |
 | Énergie identique entre itérations | Output QE non rafraîchi | [Convergence](#convergence) |
+| `symbole chimique inconnu` | Formule chimique invalide | [Formule invalide](#formule-chimique-invalide) |
 
 ---
 
@@ -147,6 +148,30 @@ Une seule thread OpenMP par rang MPI est recommandée pour Quantum ESPRESSO.
 **Solutions :**
 - Rebuilder l'image avec QE compilé depuis les sources
 - Vérifier les permissions du volume monté : `docker run -v ${PWD}:/data ...`
+
+---
+
+## Formule chimique invalide
+
+**Symptôme :**
+```
+❌ Erreur: symbole chimique inconnu 'Bo' dans 'BBo'.
+```
+
+**Cause :** La chaîne passée à `fetcher.py` ou `qe-bridge` n'est pas une formule chimique valide. Chaque segment doit correspondre à un élément du tableau périodique (`Si`, `C`, `Ge`…), pas à une chaîne arbitraire.
+
+**Exemple déclencheur :**
+```bash
+python3 fetcher.py BBo   # 'Bo' n'est pas un symbole chimique valide
+```
+
+**Solution :** Vérifiez l'orthographe de la formule. Utilisez uniquement des symboles d'éléments reconnus :
+
+```bash
+python3 fetcher.py B     # Bore
+python3 fetcher.py Si    # Silicium
+python3 fetcher.py SiGe  # Alliage silicium-germanium
+```
 
 ---
 

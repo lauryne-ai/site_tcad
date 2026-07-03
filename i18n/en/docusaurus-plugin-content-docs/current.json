@@ -1,12 +1,15 @@
 {
   "sidebar.docsSidebar.category.Setup": {
-    "message": "Setup"
+    "message": "Setup",
+    "description": "The label for category 'Setup' in sidebar 'docsSidebar'"
   },
   "sidebar.docsSidebar.category.Architecture": {
-    "message": "Architecture"
+    "message": "Architecture",
+    "description": "The label for category 'Architecture' in sidebar 'docsSidebar'"
   },
   "sidebar.docsSidebar.category.Référence": {
-    "message": "Reference"
+    "message": "Reference",
+    "description": "The label for category 'Référence' in sidebar 'docsSidebar'"
   },
   "sidebar.docsSidebar.doc.Welcome": {
     "message": "Welcome"
@@ -22,5 +25,42 @@
   },
   "sidebar.docsSidebar.doc.Contribution": {
     "message": "Contributing"
+  },
+  "sidebar.docsSidebar.doc.Vue d'ensemble": {
+    "message": "Overview"
+  },
+  "sidebar.docsSidebar.doc.Utilisation": {
+    "message": "Usage"
+  },
+  "sidebar.docsSidebar.doc.Erreurs fréquentes": {
+    "message": "Common errors"
+  },
+  "sidebar.docsSidebar.doc.Optimisation": {
+    "message": "Optimization"
+  },
+  "sidebar.docsSidebar.doc.Physique du calcul": {
+    "message": "Physics"
+  },
+  "sidebar.docsSidebar.doc.Convergence": {
+    "message": "Convergence"
+  },
+  "sidebar.docsSidebar.doc.Formats de données": {
+    "message": "Data formats"
+  },
+  "sidebar.docsSidebar.doc.Modules": {
+    "message": "Modules"
+  },
+  "sidebar.docsSidebar.doc.Installation": {
+    "message": "Installation"
+  },
+  "sidebar.docsSidebar.doc.Variables d'environnement": {
+    "message": "Environment variables"
+  },
+  "sidebar.docsSidebar.doc.CLI": {
+    "message": "CLI"
+  },
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
   }
 }

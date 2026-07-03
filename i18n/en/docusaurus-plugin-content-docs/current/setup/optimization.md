@@ -1,6 +1,6 @@
 ---
 sidebar_position: 5
-title: Optimisation
+title: Optimization
 ---
 
 # Optimisation
@@ -53,7 +53,7 @@ Le module `kpoint_predictor.py` propose des grilles k adaptées à la structure 
 Pour valider l'installation sans lancer un calcul complet :
 
 ```bash
-python3 fetcher.py C --light_mode
+python3 fetcher.py C --light_mode_mode
 ```
 
 Réduit la grille k-points et le nombre de bandes pour un test en quelques minutes.
@@ -95,4 +95,4 @@ python3 clean_save_directories.py
 ## Voir aussi
 
 - [Architecture — Convergence](/docs/architecture/convergence)
-- [Erreurs fréquentes — Performance MPI](/docs/setup/troubleshooting#performance-mpi)
+- [Common errors — MPI performance](/docs/setup/troubleshooting#mpi-performance)

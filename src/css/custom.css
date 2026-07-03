@@ -63,3 +63,166 @@
   color: var(--ifm-color-emphasis-700);
   margin: 0;
 }
+
+/* Diagramme pipeline — taille lisible */
+.pipeline-diagram {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background: var(--ifm-background-surface-color);
+  border-radius: var(--ifm-card-border-radius);
+  border: 1px solid var(--ifm-color-emphasis-200);
+  overflow-x: auto;
+}
+
+.pipeline-diagram .mermaid {
+  display: flex;
+  justify-content: center;
+  min-width: 100%;
+}
+
+.pipeline-diagram .mermaid svg {
+  max-width: none !important;
+  min-width: 720px;
+  height: auto !important;
+  font-size: 15px !important;
+}
+
+/* Blocs de commandes — mode clair : fond gris (style QE) */
+:root {
+  --code-block-bg: #f6f8fa;
+  --code-block-border: #d8dee4;
+  --code-text: #24292f;
+  --code-comment: #6a737d;
+  --code-flag: #0997b3;
+  --code-keyword: #cf222e;
+  --code-string: #032f62;
+  --code-number: #0997b3;
+}
+
+/* Mode sombre — fond bleu marine (style QE dark) */
+[data-theme='dark'] {
+  --code-block-bg: #011627;
+  --code-block-border: #1a3a52;
+  --code-text: #d6deeb;
+  --code-comment: #637777;
+  --code-flag: #c8d3e8;
+  --code-keyword: #82aaff;
+  --code-string: #ecc48d;
+  --code-number: #f78c6c;
+}
+
+div[class*='codeBlockContainer'] {
+  background: var(--code-block-bg) !important;
+  border: 1px solid var(--code-block-border) !important;
+  border-radius: 8px;
+  box-shadow: none !important;
+}
+
+div[class*='codeBlockContainer'] pre,
+pre.prism-code,
+code[class*='language-'] {
+  background: var(--code-block-bg) !important;
+  color: var(--code-text) !important;
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+
+/* Bouton copier — mode clair */
+div[class*='codeBlockContainer'] button[class*='copyButton'] {
+  background: rgba(0, 0, 0, 0.05) !important;
+  color: #57606a !important;
+}
+
+div[class*='codeBlockContainer'] button[class*='copyButton']:hover {
+  background: rgba(0, 0, 0, 0.1) !important;
+  color: #24292f !important;
+}
+
+/* Bouton copier — mode sombre */
+[data-theme='dark'] div[class*='codeBlockContainer'] button[class*='copyButton'] {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #8badc1 !important;
+}
+
+[data-theme='dark'] div[class*='codeBlockContainer'] button[class*='copyButton']:hover {
+  background: rgba(255, 255, 255, 0.14) !important;
+  color: #d6deeb !important;
+}
+
+/* Commentaires */
+.token.comment,
+.token.prolog,
+.token.doctype {
+  color: var(--code-comment) !important;
+  font-style: italic;
+}
+
+/* Mots-clés / commandes système */
+.token.keyword,
+.token.builtin {
+  color: var(--code-keyword) !important;
+}
+
+/* Options et flags */
+.token.parameter,
+.token.attr-name,
+.token.property {
+  color: var(--code-flag) !important;
+}
+
+/* Nombres */
+.token.number {
+  color: var(--code-number) !important;
+}
+
+/* Chaînes et chemins */
+.token.string,
+.token.char,
+.token.url {
+  color: var(--code-string) !important;
+}
+
+/* Exécutables et texte principal */
+.token.function,
+.token.class-name,
+.token.operator,
+.token.punctuation,
+.token.plain-text,
+.token.variable {
+  color: var(--code-text) !important;
+}
+
+/* Mode sombre : sudo, apt, wget… en bleu clair ; arguments en gris clair */
+[data-theme='dark'] .token.keyword,
+[data-theme='dark'] .token.builtin {
+  color: #82aaff !important;
+}
+
+[data-theme='dark'] .token.function,
+[data-theme='dark'] .token.class-name {
+  color: #82aaff !important;
+}
+
+[data-theme='dark'] .token.parameter,
+[data-theme='dark'] .token.attr-name,
+[data-theme='dark'] .token.property,
+[data-theme='dark'] .token.plain-text,
+[data-theme='dark'] .token.punctuation,
+[data-theme='dark'] .token.operator {
+  color: #d6deeb !important;
+}
+
+/* Inline code — mode clair */
+:not(pre) > code {
+  background: #eff1f3;
+  border: 1px solid #d8dee4;
+  color: #24292f;
+}
+
+/* Inline code — mode sombre */
+[data-theme='dark'] :not(pre) > code {
+  background: #0d2137;
+  border-color: #1a3a52;
+  color: #d6deeb;
+}
+

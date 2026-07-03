@@ -9,18 +9,9 @@ The APE Bridge orchestrates a complete workflow from the **Materials Project dat
 
 ## Data flow
 
-```mermaid
-flowchart LR
-    MP[MaterialsProject] --> Fetcher[fetcher.py]
-    Fetcher --> Gen[qe_input_generator]
-    Gen --> Runner[qe_runner.py]
-    Runner --> Conv[convergence_manager]
-    Conv --> Eps[epsilon.x]
-    Eps --> Parse[parse_tcad_parameters]
-    Parse --> JSON[parsed_data/*.json]
-    JSON --> TCAD[Sentaurus / DEVSIM]
-    Parse --> Plots[plotter.py]
-```
+import PipelineDiagram from '@site/src/components/PipelineDiagram';
+
+<PipelineDiagram />
 
 ## Main steps
 
@@ -32,18 +23,15 @@ flowchart LR
 
 ### 2. QE input generation
 
-The `qe_input_generator.py` module produces `.in` files for:
-- SCF calculation (self-consistency)
-- NSCF calculation (bands on dense k-grid)
-- `epsilon.x` calculation (dielectric function)
+The `qe_input_generator.py` module produces `.in` files for SCF, NSCF, and `epsilon.x` calculations.
 
 ### 3. Execution and convergence
 
-`qe_runner.py` runs `pw.x` and `epsilon.x` with MPI. `convergence_manager.py` automatically optimizes ecut, k-points and lattice.
+`qe_runner.py` runs `pw.x` and `epsilon.x` with MPI. `convergence_manager.py` optimizes ecut, k-points and lattice.
 
 ### 4. Extraction and export
 
-`parse_tcad_parameters.py` parses QE outputs and produces structured JSON in `parsed_data/`.
+`parse_tcad_parameters.py` parses QE outputs into structured JSON in `parsed_data/`.
 
 ### 5. Visualization
 

@@ -7,10 +7,6 @@ const config: Config = {
   tagline: 'Pipeline automatisé Quantum ESPRESSO → TCAD',
   favicon: 'img/favicon.ico',
 
-  future: {
-    v4: true,
-  },
-
   url: 'https://lauryneeklou.github.io',
   baseUrl: '/site_Tcad/',
 
@@ -78,29 +74,34 @@ const config: Config = {
           label: 'Documentation',
         },
         {
-          to: '/docs/welcome',
+          type: 'doc',
+          docId: 'welcome',
+          position: 'left',
           label: 'Welcome',
-          position: 'left',
         },
         {
-          to: '/docs/setup',
+          type: 'doc',
+          docId: 'setup/index',
+          position: 'left',
           label: 'Setup',
-          position: 'left',
         },
         {
-          to: '/docs/architecture/overview',
+          type: 'doc',
+          docId: 'architecture/overview',
+          position: 'left',
           label: 'Architecture',
-          position: 'left',
         },
         {
-          to: '/docs/gallery',
+          type: 'doc',
+          docId: 'gallery',
+          position: 'left',
           label: 'Galerie',
-          position: 'left',
         },
         {
-          to: '/docs/resources',
-          label: 'Ressources',
+          type: 'doc',
+          docId: 'resources',
           position: 'left',
+          label: 'Ressources',
         },
         {
           type: 'localeDropdown',
@@ -149,7 +150,8 @@ const config: Config = {
     },
     prism: {
       theme: prismThemes.github,
-      darkTheme: prismThemes.dracula,
+      darkTheme: prismThemes.nightOwl,
+      additionalLanguages: ['bash', 'python', 'json'],
     },
   } satisfies Preset.ThemeConfig,
 };

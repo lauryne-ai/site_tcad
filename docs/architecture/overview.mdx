@@ -9,18 +9,9 @@ The APE Bridge orchestre un flux complet depuis la **base de données Materials 
 
 ## Flux de données
 
-```mermaid
-flowchart LR
-    MP[MaterialsProject] --> Fetcher[fetcher.py]
-    Fetcher --> Gen[qe_input_generator]
-    Gen --> Runner[qe_runner.py]
-    Runner --> Conv[convergence_manager]
-    Conv --> Eps[epsilon.x]
-    Eps --> Parse[parse_tcad_parameters]
-    Parse --> JSON[parsed_data/*.json]
-    JSON --> TCAD[Sentaurus / DEVSIM]
-    Parse --> Plots[plotter.py]
-```
+import PipelineDiagram from '@site/src/components/PipelineDiagram';
+
+<PipelineDiagram />
 
 ## Étapes principales
 

@@ -4,24 +4,35 @@
     "description": "The title in the navbar"
   },
   "item.label.Documentation": {
-    "message": "Documentation"
+    "message": "Documentation",
+    "description": "Navbar item with label Documentation"
   },
   "item.label.Welcome": {
-    "message": "Welcome"
+    "message": "Welcome",
+    "description": "Navbar item with label Welcome"
   },
   "item.label.Setup": {
-    "message": "Setup"
+    "message": "Setup",
+    "description": "Navbar item with label Setup"
   },
   "item.label.Architecture": {
-    "message": "Architecture"
+    "message": "Architecture",
+    "description": "Navbar item with label Architecture"
   },
   "item.label.Galerie": {
-    "message": "Gallery"
+    "message": "Gallery",
+    "description": "Navbar item with label Galerie"
   },
   "item.label.Ressources": {
-    "message": "Resources"
+    "message": "Resources",
+    "description": "Navbar item with label Ressources"
   },
   "item.label.GitHub": {
-    "message": "GitHub"
+    "message": "GitHub",
+    "description": "Navbar item with label GitHub"
+  },
+  "logo.alt": {
+    "message": "APE Bridge Logo",
+    "description": "The alt text of navbar logo"
   }
 }
