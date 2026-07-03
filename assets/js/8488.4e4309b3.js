@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunkape_bridge_docs=globalThis.webpackChunkape_bridge_docs||[]).push([[8488],{8488(e,c,a){a.d(c,{createArchitectureServices:()=>r.S});var r=a(9221);a(1400)}}]);
