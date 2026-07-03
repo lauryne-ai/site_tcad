@@ -7,12 +7,10 @@ const config: Config = {
   tagline: 'Pipeline automatisé Quantum ESPRESSO → TCAD',
   favicon: 'img/favicon.ico',
 
-  url: 'https://lauryneeklou.github.io',
+  url: 'https://lauryne-ai.github.io',
   baseUrl: '/site_Tcad/',
-
-  organizationName: 'LauryneEklou',
+  organizationName: 'lauryne-ai',
   projectName: 'site_Tcad',
-
   onBrokenLinks: 'throw',
 
   i18n: {
