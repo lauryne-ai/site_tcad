@@ -7,6 +7,21 @@ title: Utilisation
 
 Ce guide présente les cas d'usage courants de **The APE Bridge**.
 
+## Workflow complet (PyPI)
+
+```bash
+pip install 'qe-to-tcad[tcad]'
+```
+
+Exportez ensuite votre clé Materials Project (voir [Installation](/docs/setup/installation#clé-api-materials-project-obligatoire)), puis :
+
+```bash
+qe-bridge SiGe          # 1. Calcul + export JSON
+qe-plot SiGe            # 2. Tracer ε(ω)
+qe-tcad SiGe diode      # 3a. Validation diode
+qe-tcad SiGe transistor # 3b. Validation transistor
+```
+
 ## Lancer le pipeline complet
 
 La commande principale est `qe-bridge` :
@@ -19,6 +34,7 @@ qe-bridge <formule_chimique>
 qe-bridge C      # Carbone (diamant)
 qe-bridge Si     # Silicium
 qe-bridge Ge     # Germanium
+qe-bridge SiGe   # Silicium-germanium
 ```
 
 Équivalent en mode module :
@@ -50,17 +66,20 @@ python3 -m qe_to_tcad Si
 
 ## Visualiser la fonction diélectrique
 
-### Terminal (SSH-friendly)
-
 ```bash
-python3 plotter.py epsilon_out/C_epsr.dat
+qe-plot SiGe
+qe-plot C
 ```
 
-Affiche les courbes ε_x, ε_y, ε_z directement dans le terminal via `plotext`.
+### Scripts avancés (dépôt source)
 
-### PNG haute résolution
+Si vous travaillez depuis le dépôt cloné :
 
 ```bash
+# Terminal (SSH-friendly)
+python3 plotter.py epsilon_out/C_epsr.dat
+
+# PNG haute résolution
 python3 plotter.py epsilon_out/Si_epsr.dat --verbose
 python3 plotter.py epsilon_out/Ge_epsr.dat --downsample 10
 ```
@@ -68,7 +87,7 @@ python3 plotter.py epsilon_out/Ge_epsr.dat --downsample 10
 ## Courbes de convergence
 
 ```bash
-# Affichage terminal
+# Affichage terminal (dépôt source)
 python3 plot_convergence_progressive.py convergence_data/C_convergence.json
 
 # Génère aussi: plots/C_convergence_*.png
@@ -101,13 +120,17 @@ Le JSON contient notamment :
 }
 ```
 
-## Validation TCAD (DEVSIM)
+## Simulations TCAD (diode / transistor)
 
 ```bash
-# Diode 1D
-python3 plot_complet.py parsed_data/SiGe.json diode
+qe-tcad SiGe diode
+qe-tcad SiGe transistor
+```
 
-# Transistor 1D
+### Scripts avancés (dépôt source)
+
+```bash
+python3 plot_complet.py parsed_data/SiGe.json diode
 python3 plot_complet.py parsed_data/SiGe.json transistor
 ```
 

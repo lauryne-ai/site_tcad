@@ -38,30 +38,31 @@ Device engineers and materials researchers need accurate material properties —
 ## Quick Start
 
 ```bash
-# 1. Clone and install
-git clone https://github.com/LauryneEklou/QE_to_TCAD.git
-cd QE_to_TCAD
-python3 -m venv .venv && source .venv/bin/activate
-pip install -e .
+# 1. Install (PyPI)
+pip install 'qe-to-tcad[tcad]'
 
-# 2. Run the pipeline (example: Carbon)
-qe-bridge C
+# 2. Materials Project API key (required — create your own)
+# Linux / macOS:
+export MP_API_KEY="your_32_character_key"
+# Windows PowerShell: $env:MP_API_KEY="your_32_character_key"
 
-# 3. Visualize the dielectric function
-python3 plotter.py epsilon_out/C_epsr.dat
+# 3. Pipeline + plot + TCAD validation
+qe-bridge SiGe
+qe-plot SiGe
+qe-tcad SiGe diode
 ```
 
 ## Global workflow
 
 ```mermaid
 flowchart LR
-    MP[Materials Project] --> Fetcher[fetcher.py]
+    MP[Materials Project] --> Fetcher[qe-bridge]
     Fetcher --> Gen[QE input generation]
     Gen --> SCF[SCF / NSCF]
     SCF --> Eps[epsilon.x]
     Eps --> JSON[parsed_data/*.json]
-    JSON --> TCAD[TCAD simulators]
-    Eps --> Plots[plotter.py]
+    JSON --> TCAD[qe-tcad]
+    Eps --> Plots[qe-plot]
 ```
 
 ## Next steps

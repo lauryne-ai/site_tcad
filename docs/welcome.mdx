@@ -38,30 +38,31 @@ Les ingénieurs et chercheurs en microélectronique ont besoin de propriétés m
 ## Quick Start
 
 ```bash
-# 1. Cloner et installer
-git clone https://github.com/LauryneEklou/QE_to_TCAD.git
-cd QE_to_TCAD
-python3 -m venv .venv && source .venv/bin/activate
-pip install -e .
+# 1. Installer (PyPI)
+pip install 'qe-to-tcad[tcad]'
 
-# 2. Lancer le pipeline (exemple : Carbone)
-qe-bridge C
+# 2. Clé API Materials Project (obligatoire — créez la vôtre)
+# Linux / macOS :
+export MP_API_KEY="votre_cle_32_caracteres"
+# Windows PowerShell : $env:MP_API_KEY="votre_cle_32_caracteres"
 
-# 3. Visualiser la fonction diélectrique
-python3 plotter.py epsilon_out/C_epsr.dat
+# 3. Pipeline + plot + validation TCAD
+qe-bridge SiGe
+qe-plot SiGe
+qe-tcad SiGe diode
 ```
 
 ## Flux global
 
 ```mermaid
 flowchart LR
-    MP[Materials Project] --> Fetcher[fetcher.py]
+    MP[Materials Project] --> Fetcher[qe-bridge]
     Fetcher --> Gen[Génération inputs QE]
     Gen --> SCF[SCF / NSCF]
     SCF --> Eps[epsilon.x]
     Eps --> JSON[parsed_data/*.json]
-    JSON --> TCAD[Simulateurs TCAD]
-    Eps --> Plots[plotter.py]
+    JSON --> TCAD[qe-tcad]
+    Eps --> Plots[qe-plot]
 ```
 
 ## Prochaines étapes

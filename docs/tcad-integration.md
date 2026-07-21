@@ -45,16 +45,19 @@ sim = DeviceSimulator("parsed_data/Si_device_bridge.json")
 sim.run_diode()
 ```
 
-### Validation diode 1D
+### Validation diode / transistor (recommandé)
+
+```bash
+qe-tcad SiGe diode
+qe-tcad SiGe transistor
+```
+
+### Scripts avancés (dépôt source)
 
 ```bash
 python3 plot_complet.py parsed_data/SiGe.json diode
 # Sortie: validation_diode_SiGe.png
-```
 
-### Validation transistor 1D
-
-```bash
 python3 plot_complet.py parsed_data/SiGe.json transistor
 # Sortie: validation_transistor_SiGe.png
 ```
@@ -80,9 +83,8 @@ python3 devsim_cv_ac.py
 
 ```mermaid
 flowchart LR
-    QE[qe-bridge Si] --> JSON[parsed_data/Si.json]
-    JSON --> Bridge[devsim_bridge.py]
-    Bridge --> Sim[plot_complet.py]
+    QE[qe-bridge SiGe] --> JSON[parsed_data/SiGe.json]
+    JSON --> Sim[qe-tcad]
     Sim --> Valid[validation_*.png]
     JSON --> Sentaurus[Import Sentaurus]
 ```

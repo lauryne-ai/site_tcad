@@ -60,6 +60,16 @@ npm run serve
 5. URL finale : [https://lauryne-ai.github.io/site_tcad/](https://lauryne-ai.github.io/site_tcad/)
 6. Une fois déployé, le menu **Français / English** fonctionne sur le site en ligne
 
+## Package utilisateur (PyPI / Docker)
+
+Documentation des commandes `qe-bridge`, `qe-plot` et `qe-tcad` :
+
+- PyPI : `pip install 'qe-to-tcad[tcad]'`
+- Docker : `lauryneelv/qe-to-tcad:0.2.4`
+- Clé API : chaque utilisateur crée la sienne sur [Materials Project](https://next-gen.materialsproject.org/) (`export MP_API_KEY=...`)
+
+Voir [Installation](https://lauryne-ai.github.io/site_tcad/docs/setup/installation) et [CLI](https://lauryne-ai.github.io/site_tcad/docs/reference/cli).
+
 ## Structure
 
 | Dossier | Contenu |

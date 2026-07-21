@@ -42,7 +42,9 @@ The `qe_input_generator.py` module produces `.in` files for SCF, NSCF, and `epsi
 | Command | Role |
 |---------|------|
 | `qe-bridge <formula>` | Full pipeline (recommended) |
-| `python3 fetcher.py <formula>` | Direct orchestrator |
+| `qe-plot <formula>` | ε(ω) plot |
+| `qe-tcad <formula> diode\|transistor` | 1D device simulation |
+| `python3 fetcher.py <formula>` | Direct orchestrator (source repo) |
 | `python3 convergence_manager.py` | Convergence only |
 | `python3 qe_runner.py <file.in>` | Low-level QE execution |
 

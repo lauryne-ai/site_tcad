@@ -3,58 +3,104 @@ sidebar_position: 1
 title: CLI
 ---
 
-# Référence CLI
+# CLI reference
+
+The commands below are installed via:
+
+```bash
+pip install 'qe-to-tcad[tcad]'
+```
 
 ## `qe-bridge`
 
-Commande principale installée via `pip install -e .`.
+Main pipeline: Materials Project → Quantum ESPRESSO → TCAD JSON export.
 
 ```bash
-qe-bridge <formule_chimique> [options]
+qe-bridge <chemical_formula> [options]
 ```
 
 ### Arguments
 
 | Argument | Description |
 |----------|-------------|
-| `formule_chimique` | Symbole ou formule (ex. `C`, `Si`, `SiGe`) |
+| `chemical_formula` | Symbol or formula (e.g. `C`, `Si`, `SiGe`) |
 
-### Options courantes
+### Common options
 
 | Option | Description |
 |--------|-------------|
-| `--pw PATH` | Chemin vers `pw.x` |
-| `--epsilon PATH` | Chemin vers `epsilon.x` |
-| `--nproc N` | Nombre de processus MPI |
-| `--qe-path PATH` | Répertoire bin de QE |
-| `--help` | Afficher l'aide |
+| `--pw PATH` | Path to `pw.x` |
+| `--epsilon PATH` | Path to `epsilon.x` |
+| `--nproc N` | Number of MPI processes |
+| `--qe-path PATH` | QE bin directory |
+| `--help` | Show help |
 
-### Exemples
+### Examples
 
 ```bash
 qe-bridge C
 qe-bridge Si --nproc 8
 qe-bridge Ge --pw /opt/qe/bin/pw.x
+qe-bridge SiGe
+```
+
+:::info API key
+`qe-bridge` requires `MP_API_KEY` (see [Installation](/docs/setup/installation#materials-project-api-key-required)).
+:::
+
+## `qe-plot`
+
+Plots the dielectric function ε(ω) for a material that has already been computed.
+
+```bash
+qe-plot <chemical_formula>
+```
+
+### Examples
+
+```bash
+qe-plot SiGe
+qe-plot C
+```
+
+## `qe-tcad`
+
+Runs a 1D device simulation (diode or transistor) from exported data.
+
+```bash
+qe-tcad <chemical_formula> <device>
+```
+
+| Argument | Values |
+|----------|--------|
+| `chemical_formula` | e.g. `Si`, `SiGe`, `C` |
+| `device` | `diode` or `transistor` |
+
+### Examples
+
+```bash
+qe-tcad SiGe diode
+qe-tcad SiGe transistor
 ```
 
 ## `python3 -m qe_to_tcad`
 
-Équivalent au CLI :
+Equivalent to `qe-bridge`:
 
 ```bash
 python3 -m qe_to_tcad Si
 ```
 
-## Scripts utilitaires
+## Utility scripts (source repository)
 
-| Commande | Description |
-|----------|-------------|
-| `python3 fetcher.py <formule>` | Orchestrateur direct |
-| `python3 qe_runner.py <fichier.in>` | Exécution QE bas niveau |
-| `python3 plotter.py <fichier.dat>` | Tracer ε(ω) |
-| `python3 plot_convergence.py <mat>` | Courbes de convergence |
-| `python3 plot_complet.py <json> diode\|transistor` | Validation DEVSIM |
-| `python3 convergence_manager.py` | Convergence standalone |
+| Command | Description |
+|---------|-------------|
+| `python3 fetcher.py <formula>` | Direct orchestrator |
+| `python3 qe_runner.py <file.in>` | Low-level QE execution |
+| `python3 plotter.py <file.dat>` | Plot ε(ω) (low-level equivalent of `qe-plot`) |
+| `python3 plot_convergence.py <mat>` | Convergence curves |
+| `python3 plot_complet.py <json> diode\|transistor` | DEVSIM validation (low-level equivalent of `qe-tcad`) |
+| `python3 convergence_manager.py` | Standalone convergence |
 
 ## Tests
 
@@ -63,7 +109,8 @@ python3 -m pytest tests/ -v
 python3 verify_convergence_manager.py
 ```
 
-## Voir aussi
+## See also
 
-- [Variables d'environnement](/docs/reference/env)
-- [Utilisation](/docs/setup/usage)
+- [Environment variables](/docs/reference/env)
+- [Usage](/docs/setup/usage)
+- [Docker installation](/docs/setup/installation#docker-option)

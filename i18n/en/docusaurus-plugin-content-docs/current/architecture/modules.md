@@ -67,8 +67,11 @@ Référence des principaux fichiers Python et de leur rôle dans le pipeline.
 Le package `qe_to_tcad` (défini dans `pyproject.toml`) expose :
 
 ```bash
-qe-bridge --help    # CLI principal
-python3 -m qe_to_tcad Si   # Mode module
+pip install 'qe-to-tcad[tcad]'
+qe-bridge --help    # QE → TCAD pipeline
+qe-plot --help      # ε(ω) plot
+qe-tcad --help      # Diode / transistor simulations
+python3 -m qe_to_tcad Si   # Module mode (= qe-bridge)
 ```
 
 ## Voir aussi

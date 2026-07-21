@@ -5,9 +5,15 @@ title: CLI
 
 # Référence CLI
 
+Les commandes ci-dessous sont installées via :
+
+```bash
+pip install 'qe-to-tcad[tcad]'
+```
+
 ## `qe-bridge`
 
-Commande principale installée via `pip install -e .`.
+Pipeline principal : Materials Project → Quantum ESPRESSO → export JSON TCAD.
 
 ```bash
 qe-bridge <formule_chimique> [options]
@@ -35,25 +41,65 @@ qe-bridge <formule_chimique> [options]
 qe-bridge C
 qe-bridge Si --nproc 8
 qe-bridge Ge --pw /opt/qe/bin/pw.x
+qe-bridge SiGe
+```
+
+:::info Clé API
+`qe-bridge` nécessite `MP_API_KEY` (voir [Installation](/docs/setup/installation#clé-api-materials-project-obligatoire)).
+:::
+
+## `qe-plot`
+
+Trace la fonction diélectrique ε(ω) pour un matériau déjà calculé.
+
+```bash
+qe-plot <formule_chimique>
+```
+
+### Exemples
+
+```bash
+qe-plot SiGe
+qe-plot C
+```
+
+## `qe-tcad`
+
+Lance une simulation de dispositif 1D (diode ou transistor) à partir des données exportées.
+
+```bash
+qe-tcad <formule_chimique> <dispositif>
+```
+
+| Argument | Valeurs |
+|----------|---------|
+| `formule_chimique` | Ex. `Si`, `SiGe`, `C` |
+| `dispositif` | `diode` ou `transistor` |
+
+### Exemples
+
+```bash
+qe-tcad SiGe diode
+qe-tcad SiGe transistor
 ```
 
 ## `python3 -m qe_to_tcad`
 
-Équivalent au CLI :
+Équivalent à `qe-bridge` :
 
 ```bash
 python3 -m qe_to_tcad Si
 ```
 
-## Scripts utilitaires
+## Scripts utilitaires (dépôt source)
 
 | Commande | Description |
 |----------|-------------|
 | `python3 fetcher.py <formule>` | Orchestrateur direct |
 | `python3 qe_runner.py <fichier.in>` | Exécution QE bas niveau |
-| `python3 plotter.py <fichier.dat>` | Tracer ε(ω) |
+| `python3 plotter.py <fichier.dat>` | Tracer ε(ω) (équivalent bas niveau de `qe-plot`) |
 | `python3 plot_convergence.py <mat>` | Courbes de convergence |
-| `python3 plot_complet.py <json> diode\|transistor` | Validation DEVSIM |
+| `python3 plot_complet.py <json> diode\|transistor` | Validation DEVSIM (équivalent bas niveau de `qe-tcad`) |
 | `python3 convergence_manager.py` | Convergence standalone |
 
 ## Tests
@@ -67,3 +113,4 @@ python3 verify_convergence_manager.py
 
 - [Variables d'environnement](/docs/reference/env)
 - [Utilisation](/docs/setup/usage)
+- [Installation Docker](/docs/setup/installation#option-docker)

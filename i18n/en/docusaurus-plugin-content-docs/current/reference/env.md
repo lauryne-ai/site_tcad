@@ -3,62 +3,86 @@ sidebar_position: 2
 title: Environment variables
 ---
 
-# Variables d'environnement
+# Environment variables
 
-The APE Bridge lit les variables depuis le fichier `.env` (via `python-dotenv`) ou l'environnement système.
+The APE Bridge reads variables from a `.env` file (via `python-dotenv`) or the system environment.
 
-## Fichier `.env` (exemple)
+## Local `.env` file (example)
+
+Create a `.env` file **locally only**. Never commit it.
 
 ```bash
 # Quantum ESPRESSO
-QE_PATH=/home/user/q-e-7.0/bin
-QE_PW=/home/user/q-e-7.0/bin/pw.x
-QE_EPSILON=/home/user/q-e-7.0/bin/epsilon.x
+QE_PATH=/path/to/q-e/bin
+QE_PW=/path/to/q-e/bin/pw.x
+QE_EPSILON=/path/to/q-e/bin/epsilon.x
 
 # MPI
 MPI_COMMAND=mpirun
 MPI_NPROC=4
 
-# Pseudopotentiels
-PSEUDOPOTENTIAL_DIR=/home/user/.qe_pseudo/
+# Pseudopotentials
+PSEUDOPOTENTIAL_DIR=/path/to/pseudopotentials/
 
-# Materials Project
-MP_API_KEY=votre_cle_api
+# Materials Project — your personal key only
+MP_API_KEY=your_api_key
 ```
 
-## Référence
+:::danger Security
+No API key is shipped with the package. Every user must create their own on [Materials Project](https://next-gen.materialsproject.org/).
+Never push a `.env` containing `MP_API_KEY` to GitHub.
+:::
 
-| Variable | Description | Défaut |
-|----------|-------------|--------|
-| `QE_PATH` | Répertoire contenant `pw.x` et `epsilon.x` | Cherche dans `PATH` |
-| `QE_PW` | Chemin absolu vers `pw.x` | — |
-| `QE_EPSILON` | Chemin absolu vers `epsilon.x` | — |
-| `MPI_COMMAND` | Commande MPI (`mpirun`, `srun`) | `mpirun` |
-| `MPI_NPROC` | Nombre de processus MPI | `1` |
-| `PSEUDOPOTENTIAL_DIR` | Répertoire des fichiers `.upf` | `pseudopotentials/` |
-| `MP_API_KEY` | Clé API Materials Project | Requis pour fetch structures |
-| `OMP_NUM_THREADS` | Threads OpenMP (système) | `1` recommandé |
+## Reference
 
-## Obtenir une clé Materials Project
+| Variable | Description | Default |
+|----------|-------------|---------|
+| `QE_PATH` | Directory containing `pw.x` and `epsilon.x` | Searches `PATH` |
+| `QE_PW` | Absolute path to `pw.x` | — |
+| `QE_EPSILON` | Absolute path to `epsilon.x` | — |
+| `MPI_COMMAND` | MPI command (`mpirun`, `srun`) | `mpirun` |
+| `MPI_NPROC` | Number of MPI processes | `1` |
+| `PSEUDOPOTENTIAL_DIR` | Directory for `.upf` files | `pseudopotentials/` |
+| `MP_API_KEY` | Materials Project API key | **Required** for `qe-bridge` |
+| `OMP_NUM_THREADS` | OpenMP threads (system) | `1` recommended |
 
-1. Créer un compte sur [materialsproject.org](https://materialsproject.org/)
-2. Générer une clé API dans les paramètres du compte
-3. Définir `MP_API_KEY` dans `.env` ou :
-   ```bash
-   export MP_API_KEY="votre_cle"
-   ```
+## Get a Materials Project key
 
-## Vérification
+1. Create an account on [next-gen.materialsproject.org](https://next-gen.materialsproject.org/)
+2. Generate a 32-character API key in account settings
+3. Set `MP_API_KEY`:
+
+**Linux / macOS:**
 
 ```bash
-# Vérifier que les variables sont chargées
-python3 -c "from dotenv import load_dotenv; import os; load_dotenv(); print(os.getenv('QE_PATH'))"
-
-# Vérifier pw.x
-which pw.x || echo "Définir QE_PATH ou --pw"
+export MP_API_KEY="your_32_character_key"
 ```
 
-## Voir aussi
+**Windows (PowerShell):**
+
+```powershell
+$env:MP_API_KEY="your_32_character_key"
+```
+
+**Windows (CMD):**
+
+```bat
+set MP_API_KEY=your_32_character_key
+```
+
+Or put it in a local, non-versioned `.env`.
+
+## Verification
+
+```bash
+# Check that variables are loaded
+python3 -c "from dotenv import load_dotenv; import os; load_dotenv(); print('MP_API_KEY set:', bool(os.getenv('MP_API_KEY')))"
+
+# Check pw.x (local install, not Docker)
+which pw.x || echo "Set QE_PATH or --pw"
+```
+
+## See also
 
 - [Installation](/docs/setup/installation)
-- [Référence CLI](/docs/reference/cli)
+- [CLI reference](/docs/reference/cli)
