@@ -7,6 +7,37 @@ title: Installation
 
 Ce guide couvre l'installation de **The APE Bridge** et de ses dépendances système (Python, Quantum ESPRESSO, MPI).
 
+## Prérequis : clé API Materials Project
+
+Avant toute utilisation, vous devez obtenir votre propre clé API. **Aucune clé n'est fournie** avec le package (pour des raisons de sécurité).
+
+1. Créer un compte sur [Materials Project](https://next-gen.materialsproject.org/)
+2. Générer une clé API (32 caractères) dans le profil
+3. L'exporter dans le shell :
+
+**Linux / macOS :**
+
+```bash
+export MP_API_KEY="votre_cle_32_caracteres"
+```
+
+**Windows (PowerShell) :**
+
+```powershell
+$env:MP_API_KEY="votre_cle_32_caracteres"
+```
+
+**Windows (Invite de commandes) :**
+
+```bat
+set MP_API_KEY=votre_cle_32_caracteres
+```
+
+:::danger Ne jamais committer la clé
+N'ajoutez pas `MP_API_KEY` dans un fichier versionné (`.env` poussé sur GitHub, Dockerfile, etc.).
+Utilisez uniquement l'environnement local ou un `.env` **non versionné**.
+:::
+
 ## Installation via PyPI (recommandé)
 
 ```bash
@@ -49,38 +80,6 @@ qe-plot --help
 qe-tcad --help
 ```
 
-## Clé API Materials Project (obligatoire)
-
-Pour des raisons de sécurité, **aucune clé API n'est fournie** avec le package.
-Chaque utilisateur doit créer la sienne avant de lancer `qe-bridge` :
-
-1. Créer un compte sur [Materials Project](https://next-gen.materialsproject.org/)
-2. Générer une clé API (32 caractères) dans le profil
-3. L'exporter dans le shell :
-
-**Linux / macOS :**
-
-```bash
-export MP_API_KEY="votre_cle_32_caracteres"
-```
-
-**Windows (PowerShell) :**
-
-```powershell
-$env:MP_API_KEY="votre_cle_32_caracteres"
-```
-
-**Windows (Invite de commandes) :**
-
-```bat
-set MP_API_KEY=votre_cle_32_caracteres
-```
-
-:::danger Ne jamais committer la clé
-N'ajoutez pas `MP_API_KEY` dans un fichier versionné (`.env` poussé sur GitHub, Dockerfile, etc.).
-Utilisez uniquement l'environnement local ou un `.env` **non versionné**.
-:::
-
 ## Prérequis système
 
 - **OS** : Linux, macOS ou Windows (Docker Desktop recommandé sous Windows pour QE)
@@ -90,6 +89,10 @@ Utilisez uniquement l'environnement local ou un `.env` **non versionné**.
 - **Espace disque** : 20 GiB recommandé
 
 ## Configuration Quantum ESPRESSO
+
+:::info Utilisateurs Docker
+Si vous utilisez Docker (voir [plus bas](#option-docker)), vous pouvez **ignorer** cette section — QE est déjà inclus dans l'image.
+:::
 
 ### Option A : Installation système (Linux)
 
@@ -166,7 +169,7 @@ cd %USERPROFILE%\qe_runs
 
 ### 2. Exporter la clé API
 
-Voir la section [Clé API Materials Project](#clé-api-materials-project-obligatoire) ci-dessus.
+Voir la section [Prérequis : clé API](#prérequis--clé-api-materials-project) ci-dessus.
 Requis pour `qe-bridge` ; optionnel pour `qe-plot` et `qe-tcad` (données locales).
 
 ### 3. Lancer les commandes

@@ -26,17 +26,17 @@ npm run start:en
 
 → [http://localhost:3000/site_tcad/en/](http://localhost:3000/site_tcad/en/)
 
-### Important : menu de langue (FR ↔ EN)
+### Important : menu de langue (FR ↔ EN) et recherche
 
-**Le sélecteur de langue dans la navbar ne fonctionne pas en mode développement** (`npm start`). C'est le comportement normal de Docusaurus : une seule locale est servie à la fois en local.
+**Le sélecteur de langue et la barre de recherche ne fonctionnent pas en mode développement** (`npm start`). C'est le comportement normal de Docusaurus / du plugin de recherche locale : l'index est généré uniquement lors du `build`.
 
-Pour tester le changement de langue comme en production :
+Pour tester le changement de langue **et** la recherche comme en production :
 
 ```bash
 npm run serve:prod
 ```
 
-Puis ouvrez [http://localhost:3000/site_tcad/](http://localhost:3000/site_tcad/) et utilisez le menu **Français / English** — cela fonctionnera.
+Puis ouvrez [http://localhost:3000/site_tcad/](http://localhost:3000/site_tcad/) — le menu **Français / English** et la loupe de recherche fonctionneront.
 
 Après un changement de config :
 

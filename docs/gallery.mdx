@@ -15,23 +15,12 @@ Exemples de sorties produites par The APE Bridge après un calcul complet.
 - Isotropie : |ε_x − ε_y| < 0.01 %
 - Zéro-crossing (fréquence plasma) à ~12.3 eV
 
-```
-Real Dielectric Function εᵣ(ω)
-        ┌────────────────────────────┐
-    20  │        ╱╲                  │
-    15  │      ╱    ╲╱╲              │
-    10  │    ╱          ╲    εₓ ─────│
-     5  │  ╱              ╲          │
-     0  │─────────────────── ─────────│
-    -5  │                     ╱       │
-        └────────────────────────────┘
-        0        10        20        30   Energy [eV]
-```
+![C — Dispersion de la fonction diélectrique réelle εᵣ(ω)](/img/gallery/c_dielectric_dispersion.png)
 
 Les figures PNG haute résolution sont générées dans `plots/` :
 
 ```bash
-python3 plotter.py epsilon_out/C_epsr.dat
+qe-plot C
 # → plots/C_dielectric_dispersion.png
 ```
 
@@ -68,19 +57,37 @@ python3 plot_convergence_progressive.py convergence_data/Si_convergence.json
 
 Produit des graphiques montrant l'évolution de l'énergie totale et du gap en fonction de `ecutwfc` et des k-points.
 
-## Validation TCAD
+## Validation TCAD — SiGe
+
+Résultats de simulation dispositif 1D obtenus avec `qe-tcad` à partir des propriétés SiGe exportées par le pipeline.
+
+### Diode
+
+Caractéristique I–V en polarisation directe et profil de potentiel électrostatique à l'équilibre.
+
+![Validation TCAD — SiGe (diode) : caractéristique I-V et potentiel à l'équilibre](/img/gallery/sige_diode.png)
 
 ```bash
-python3 plot_complet.py parsed_data/SiGe.json diode
-# → validation_diode_SiGe.png
+qe-tcad SiGe diode
+```
+
+### Transistor NPN
+
+Caractéristique I–V et profil de potentiel à l'équilibre pour un transistor NPN SiGe.
+
+![Validation TCAD — SiGe (transistor NPN) : caractéristique I-V et profil de potentiel](/img/gallery/sige_transistor.png)
+
+```bash
+qe-tcad SiGe transistor
 ```
 
 ## Reproduire ces résultats
 
 ```bash
-qe-bridge C
-qe-bridge Si
-python3 plotter.py epsilon_out/Si_epsr.dat
+qe-bridge SiGe
+qe-plot SiGe
+qe-tcad SiGe diode
+qe-tcad SiGe transistor
 ```
 
 Voir [Utilisation](/docs/setup/usage) pour le guide complet.

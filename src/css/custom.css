@@ -226,3 +226,8 @@ div[class*='codeBlockContainer'] button[class*='copyButton']:hover {
   color: #d6deeb;
 }
 
+/* Masquer le lien d'ancre (#) au survol des titres */
+.hash-link {
+  display: none !important;
+}
+

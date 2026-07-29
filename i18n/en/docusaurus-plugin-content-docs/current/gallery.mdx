@@ -3,84 +3,91 @@ sidebar_position: 6
 title: Gallery
 ---
 
-# Galerie de résultats
+# Results gallery
 
-Exemples de sorties produites par The APE Bridge après un calcul complet.
+Example outputs produced by The APE Bridge after a full calculation.
 
-## Carbone (diamant, Fd-3m)
+## Carbon (diamond, Fd-3m)
 
-**Propriétés extraites :**
-- ε₀ ≈ 6.74 (expérimental : 6.72)
+**Extracted properties:**
+- ε₀ ≈ 6.74 (experimental: 6.72)
 - ω_p ≈ 28.9 eV
-- Isotropie : |ε_x − ε_y| < 0.01 %
-- Zéro-crossing (fréquence plasma) à ~12.3 eV
+- Isotropy: |ε_x − ε_y| < 0.01 %
+- Zero-crossing (plasma frequency) at ~12.3 eV
 
-```
-Real Dielectric Function εᵣ(ω)
-        ┌────────────────────────────┐
-    20  │        ╱╲                  │
-    15  │      ╱    ╲╱╲              │
-    10  │    ╱          ╲    εₓ ─────│
-     5  │  ╱              ╲          │
-     0  │─────────────────── ─────────│
-    -5  │                     ╱       │
-        └────────────────────────────┘
-        0        10        20        30   Energy [eV]
-```
+![C — Real dielectric function dispersion εᵣ(ω)](/img/gallery/c_dielectric_dispersion.png)
 
-Les figures PNG haute résolution sont générées dans `plots/` :
+High-resolution PNG figures are generated in `plots/`:
 
 ```bash
-python3 plotter.py epsilon_out/C_epsr.dat
+qe-plot C
 # → plots/C_dielectric_dispersion.png
 ```
 
-## Silicium (cubique, Fd-3m)
+## Silicon (cubic, Fd-3m)
 
-Exemple de JSON exporté (`parsed_data/Si.json`) :
+Example exported JSON (`parsed_data/Si.json`):
 
-| Propriété | Valeur calculée |
-|-----------|-----------------|
-| Gap de bande | 1.68 eV (indirect) |
+| Property | Computed value |
+|----------|----------------|
+| Band gap | 1.68 eV (indirect) |
 | ε₀ | ~15.9 |
 | m*_e | 0.12 m₀ |
 | m*_h | 0.85 m₀ |
 
-## Matériaux en cours / disponibles
+## Materials available / in progress
 
-| Matériau | Structure | Statut |
+| Material | Structure | Status |
 |----------|-----------|--------|
-| C | Diamant (Fd-3m) | ✓ Validé |
-| Si | Cubique (Fd-3m) | ✓ Disponible |
-| Ge | Cubique (Fd-3m) | ✓ Disponible |
-| SiGe | Alliage | ✓ Disponible |
-| Fe | Métal | ✓ Disponible |
-| Zn | Hexagonal (P6₃/mmc) | En cours |
-| Graphène | 2D | En cours |
+| C | Diamond (Fd-3m) | ✓ Validated |
+| Si | Cubic (Fd-3m) | ✓ Available |
+| Ge | Cubic (Fd-3m) | ✓ Available |
+| SiGe | Alloy | ✓ Available |
+| Fe | Metal | ✓ Available |
+| Zn | Hexagonal (P6₃/mmc) | In progress |
+| Graphene | 2D | In progress |
 
-Consultez le dossier [`parsed_data/`](https://github.com/LauryneEklou/QE_to_TCAD/tree/main/parsed_data) du dépôt pour les JSON complets.
+See the [`parsed_data/`](https://github.com/LauryneEklou/QE_to_TCAD/tree/main/parsed_data) folder in the repository for full JSON files.
 
-## Courbes de convergence
+## Convergence curves
 
 ```bash
 python3 plot_convergence_progressive.py convergence_data/Si_convergence.json
 ```
 
-Produit des graphiques montrant l'évolution de l'énergie totale et du gap en fonction de `ecutwfc` et des k-points.
+Produces plots showing total energy and band-gap evolution versus `ecutwfc` and k-points.
 
-## Validation TCAD
+## TCAD validation — SiGe
+
+1D device simulation results obtained with `qe-tcad` from SiGe properties exported by the pipeline.
+
+### Diode
+
+Forward-bias I–V characteristic and electrostatic potential profile at equilibrium.
+
+![TCAD validation — SiGe (diode): I-V characteristic and equilibrium potential](/img/gallery/sige_diode.png)
 
 ```bash
-python3 plot_complet.py parsed_data/SiGe.json diode
-# → validation_diode_SiGe.png
+qe-tcad SiGe diode
 ```
 
-## Reproduire ces résultats
+### NPN transistor
+
+I–V characteristic and equilibrium potential profile for a SiGe NPN transistor.
+
+![TCAD validation — SiGe (NPN transistor): I-V characteristic and potential profile](/img/gallery/sige_transistor.png)
 
 ```bash
-qe-bridge C
-qe-bridge Si
-python3 plotter.py epsilon_out/Si_epsr.dat
+qe-tcad SiGe transistor
 ```
 
-Voir [Utilisation](/docs/setup/usage) pour le guide complet.
+## Reproduce these results
+
+```bash
+qe-bridge SiGe
+qe-plot SiGe
+qe-tcad SiGe diode
+qe-tcad SiGe transistor
+```
+
+See [Usage](/docs/setup/usage) for the full guide.

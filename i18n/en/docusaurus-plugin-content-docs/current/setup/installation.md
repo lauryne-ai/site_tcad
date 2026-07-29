@@ -7,6 +7,37 @@ title: Installation
 
 This guide covers installing **The APE Bridge** and its system dependencies (Python, Quantum ESPRESSO, MPI).
 
+## Prerequisite: Materials Project API key
+
+Before using the tool, you must obtain your own API key. **No key is shipped** with the package (for security reasons).
+
+1. Create an account on [Materials Project](https://next-gen.materialsproject.org/)
+2. Generate a 32-character API key in your profile
+3. Export it in your shell:
+
+**Linux / macOS:**
+
+```bash
+export MP_API_KEY="your_32_character_key"
+```
+
+**Windows (PowerShell):**
+
+```powershell
+$env:MP_API_KEY="your_32_character_key"
+```
+
+**Windows (Command Prompt):**
+
+```bat
+set MP_API_KEY=your_32_character_key
+```
+
+:::danger Never commit the key
+Do not put `MP_API_KEY` in a versioned file (`.env` pushed to GitHub, Dockerfile, etc.).
+Use the local environment or a **non-versioned** `.env` only.
+:::
+
 ## PyPI installation (recommended)
 
 ```bash
@@ -49,38 +80,6 @@ qe-plot --help
 qe-tcad --help
 ```
 
-## Materials Project API key (required)
-
-For security reasons, **no API key is shipped** with the package.
-Every user must create their own before running `qe-bridge`:
-
-1. Create an account on [Materials Project](https://next-gen.materialsproject.org/)
-2. Generate a 32-character API key in your profile
-3. Export it in your shell:
-
-**Linux / macOS:**
-
-```bash
-export MP_API_KEY="your_32_character_key"
-```
-
-**Windows (PowerShell):**
-
-```powershell
-$env:MP_API_KEY="your_32_character_key"
-```
-
-**Windows (Command Prompt):**
-
-```bat
-set MP_API_KEY=your_32_character_key
-```
-
-:::danger Never commit the key
-Do not put `MP_API_KEY` in a versioned file (`.env` pushed to GitHub, Dockerfile, etc.).
-Use the local environment or a **non-versioned** `.env` only.
-:::
-
 ## System requirements
 
 - **OS**: Linux, macOS, or Windows (Docker Desktop recommended on Windows for QE)
@@ -90,6 +89,10 @@ Use the local environment or a **non-versioned** `.env` only.
 - **Disk space**: 20 GiB recommended
 
 ## Quantum ESPRESSO configuration
+
+:::info Docker users
+If you use Docker (see [below](#docker-option)), you can **skip** this section — QE is already included in the image.
+:::
 
 ### Option A: System installation (Linux)
 
@@ -105,8 +108,10 @@ which pw.x && which epsilon.x
 ### Option B: Build from source (Linux / macOS)
 
 ```bash
+# Install build dependencies
 sudo apt-get install -y gfortran make cmake libfftw3-dev libopenmpi-dev
 
+# Download and compile QE (example)
 git clone https://gitlab.com/QEF/q-e.git
 cd q-e
 ./configure --prefix=$HOME/qe-7.0
@@ -164,7 +169,7 @@ cd %USERPROFILE%\qe_runs
 
 ### 2. Export the API key
 
-See [Materials Project API key](#materials-project-api-key-required) above.
+See [Prerequisite: API key](#prerequisite-materials-project-api-key) above.
 Required for `qe-bridge`; optional for `qe-plot` and `qe-tcad` (local data).
 
 ### 3. Run the commands
