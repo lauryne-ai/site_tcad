@@ -54,11 +54,10 @@ npm run serve
 ## Déploiement GitHub Pages
 
 1. Pousser ce dépôt sur `https://github.com/lauryne-ai/site_tcad`
-2. **Settings → Pages → Build and deployment → Source : Deploy from a branch**
-3. Choisir la branche **`gh-pages`**, dossier **`/ (root)`**, puis **Save**
-4. Le workflow `.github/workflows/deploy-docs.yml` pousse le build sur `gh-pages` à chaque push sur `main`
-5. URL finale : [https://lauryne-ai.github.io/site_tcad/](https://lauryne-ai.github.io/site_tcad/)
-6. Une fois déployé, le menu **Français / English** fonctionne sur le site en ligne
+2. **Settings → Pages → Build and deployment → Source : GitHub Actions**
+3. Le workflow `.github/workflows/deploy-docs.yml` build et publie le site à chaque push sur `main`
+4. URL finale : [https://lauryne-ai.github.io/site_tcad/](https://lauryne-ai.github.io/site_tcad/)
+5. Une fois déployé, le menu **Français / English** fonctionne sur le site en ligne
 
 ## Package utilisateur (PyPI / Docker)
 
