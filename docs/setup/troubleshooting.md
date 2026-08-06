@@ -142,12 +142,19 @@ Une seule thread OpenMP par rang MPI est recommandée pour Quantum ESPRESSO.
 **Symptôme :** `pw.x` échoue avec exit code 1 dans le conteneur.
 
 **Causes :**
-- Paquet QE Debian incomplet
+- Paquet QE Debian incomplet (anciennes images)
 - Permissions insuffisantes sur `/data`
 
 **Solutions :**
-- Rebuilder l'image avec QE compilé depuis les sources
-- Vérifier les permissions du volume monté : `docker run -v ${PWD}:/data ...`
+- Utiliser l'image à jour : `docker pull lauryneelv/qe-to-tcad:latest`
+- Vérifier les permissions du volume monté : `docker run -v "$PWD:/data" ...`
+- Préciser `--epsilon empiric` (pas de prompt Y/N sans `-it`)
+- Avec `sudo docker`, passer la clé explicitement : `-e MP_API_KEY="votre_clé"`
+- Sur Mac Apple Silicon : ajouter `--platform linux/amd64` si l'image ne démarre pas
+
+:::note Anciennes images (&lt; 0.2.7)
+Depuis 0.2.7, OpenMPI autorise `mpirun` en root dans l'image. Ne documentez `-e OMPI_ALLOW_RUN_AS_ROOT=1` que pour dépanner d'anciennes images.
+:::
 
 ---
 

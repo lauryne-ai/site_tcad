@@ -112,7 +112,17 @@ python3 plotter.py epsilon_out/Si_epsr.dat
 
 ## Docker
 
-Rebuild the image with QE compiled from source if `pw.x` fails inside the container.
+If `pw.x` fails inside the container:
+
+- Pull the latest image: `docker pull lauryneelv/qe-to-tcad:latest`
+- Check mounted volume permissions: `docker run -v "$PWD:/data" ...`
+- Pass `--epsilon empiric` (no Y/N prompt without `-it`)
+- With `sudo docker`, pass the key explicitly: `-e MP_API_KEY="your_key"`
+- On Mac Apple Silicon: add `--platform linux/amd64` if the image does not start
+
+:::note Older images (&lt; 0.2.7)
+Since 0.2.7, OpenMPI allows `mpirun` as root in the image. Only use `-e OMPI_ALLOW_RUN_AS_ROOT=1` when troubleshooting older images.
+:::
 
 ---
 

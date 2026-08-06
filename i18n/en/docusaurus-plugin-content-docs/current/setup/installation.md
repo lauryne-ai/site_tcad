@@ -142,7 +142,9 @@ See the [environment reference](/docs/reference/env) for details.
 
 ## Docker option
 
-Published image: `lauryneelv/qe-to-tcad:0.2.4`
+All-in-one image: `lauryneelv/qe-to-tcad:latest` (Quantum ESPRESSO + DEVSIM + `qe-bridge`, `qe-plot`, `qe-tcad`).
+
+**Prerequisites:** Docker + `MP_API_KEY` (32-character Materials Project key) — see [Prerequisite: API key](#prerequisite-materials-project-api-key).
 
 ### 1. Prepare a working directory
 
@@ -160,60 +162,78 @@ New-Item -ItemType Directory -Force -Path "$HOME\qe_runs"
 cd $HOME\qe_runs
 ```
 
-**Windows (Command Prompt):**
+### 2. Pull the image
 
-```bat
-mkdir %USERPROFILE%\qe_runs
-cd %USERPROFILE%\qe_runs
+```bash
+docker pull lauryneelv/qe-to-tcad:latest
 ```
 
-### 2. Export the API key
+### 3. `--epsilon` option (required without `-it`)
 
-See [Prerequisite: API key](#prerequisite-materials-project-api-key) above.
-Required for `qe-bridge`; optional for `qe-plot` and `qe-tcad` (local data).
+Under Docker **without** `-it`, there is **no Y/N prompt**. You must pass `--epsilon`:
 
-### 3. Run the commands
+| Value | Role |
+|-------|------|
+| `empiric` | **Recommended** — fast run (empirical ε) |
+| `compute` | Force `epsilon.x` calculation (long / disk) |
+| `mp` | Materials Project value |
+| `ask` | Interactive prompt — **only with `-it`** |
+
+### 4. Run the commands
 
 From the working directory (current folder is mounted to `/data`):
 
-**Linux / macOS:**
+**Linux / macOS (bash):**
 
 ```bash
-# QE → TCAD pipeline
+# QE → TCAD pipeline (recommended: empiric = fast)
 docker run --rm -e MP_API_KEY -v "$PWD:/data" -w /data \
-  lauryneelv/qe-to-tcad:0.2.4 SiGe
+  lauryneelv/qe-to-tcad:latest SiGe --epsilon empiric
+
+# Force epsilon.x calculation (long / disk)
+docker run --rm -e MP_API_KEY -v "$PWD:/data" -w /data \
+  lauryneelv/qe-to-tcad:latest SiGe --epsilon compute
+
+# Interactive Y/N prompt (requires -it)
+docker run --rm -it -e MP_API_KEY -v "$PWD:/data" -w /data \
+  lauryneelv/qe-to-tcad:latest SiGe
 
 # Dielectric function ε(ω) plot
 docker run --rm -v "$PWD:/data" -w /data \
-  --entrypoint qe-plot lauryneelv/qe-to-tcad:0.2.4 SiGe
+  --entrypoint qe-plot lauryneelv/qe-to-tcad:latest SiGe
 
 # 1D diode simulation
 docker run --rm -v "$PWD:/data" -w /data \
-  --entrypoint qe-tcad lauryneelv/qe-to-tcad:0.2.4 SiGe diode
+  --entrypoint qe-tcad lauryneelv/qe-to-tcad:latest SiGe diode
 
 # 1D transistor simulation
 docker run --rm -v "$PWD:/data" -w /data \
-  --entrypoint qe-tcad lauryneelv/qe-to-tcad:0.2.4 SiGe transistor
+  --entrypoint qe-tcad lauryneelv/qe-to-tcad:latest SiGe transistor
 ```
 
 **Windows (PowerShell):**
 
 ```powershell
+$env:MP_API_KEY = "your_32_char_key"
+docker pull lauryneelv/qe-to-tcad:latest
+
 docker run --rm -e MP_API_KEY -v "${PWD}:/data" -w /data `
-  lauryneelv/qe-to-tcad:0.2.4 SiGe
+  lauryneelv/qe-to-tcad:latest SiGe --epsilon empiric
 
 docker run --rm -v "${PWD}:/data" -w /data `
-  --entrypoint qe-plot lauryneelv/qe-to-tcad:0.2.4 SiGe
+  --entrypoint qe-plot lauryneelv/qe-to-tcad:latest SiGe
 
 docker run --rm -v "${PWD}:/data" -w /data `
-  --entrypoint qe-tcad lauryneelv/qe-to-tcad:0.2.4 SiGe diode
+  --entrypoint qe-tcad lauryneelv/qe-to-tcad:latest SiGe diode
 
 docker run --rm -v "${PWD}:/data" -w /data `
-  --entrypoint qe-tcad lauryneelv/qe-to-tcad:0.2.4 SiGe transistor
+  --entrypoint qe-tcad lauryneelv/qe-to-tcad:latest SiGe transistor
 ```
 
-:::tip Windows
-With Docker Desktop, use PowerShell. If volume mounting fails, replace `"$PWD:/data"` / `"${PWD}:/data"` with an absolute path, e.g. `C:\Users\You\qe_runs:/data`.
+:::tip Docker notes
+- **`sudo docker`**: `sudo` does not keep a prior `export` — write `-e MP_API_KEY="your_key"` in the command.
+- **Mac Apple Silicon**: if the image does not start, add `--platform linux/amd64`.
+- If volume mounting fails on Windows, use an absolute path, e.g. `C:\Users\You\qe_runs:/data`.
 :::
 
 | Command | Role | `MP_API_KEY` |

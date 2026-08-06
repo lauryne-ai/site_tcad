@@ -42,7 +42,7 @@ Utilisez uniquement l'environnement local ou un `.env` **non versionné**.
 
 ```bash
 # Pipeline + plotting + simulations TCAD (diode / transistor)
-pip install 'qe-to-tcad[tcad]'
+pip install --upgrade 'qe-to-tcad[tcad]'
 
 # Vérifier
 qe-bridge --help
@@ -142,7 +142,9 @@ Consultez la [référence des variables](/docs/reference/env) pour le détail.
 
 ## Option Docker
 
-Image publiée : `lauryneelv/qe-to-tcad:0.2.4`
+Image all-in-one : `lauryneelv/qe-to-tcad:latest` (Quantum ESPRESSO + DEVSIM + `qe-bridge`, `qe-plot`, `qe-tcad`).
+
+**Prérequis :** Docker + `MP_API_KEY` (32 caractères Materials Project) — voir [Prérequis : clé API](#prérequis--clé-api-materials-project).
 
 ### 1. Préparer un dossier de travail
 
@@ -160,60 +162,78 @@ New-Item -ItemType Directory -Force -Path "$HOME\qe_runs"
 cd $HOME\qe_runs
 ```
 
-**Windows (Invite de commandes) :**
+### 2. Télécharger l'image
 
-```bat
-mkdir %USERPROFILE%\qe_runs
-cd %USERPROFILE%\qe_runs
+```bash
+docker pull lauryneelv/qe-to-tcad:latest
 ```
 
-### 2. Exporter la clé API
+### 3. Option `--epsilon` (obligatoire sans `-it`)
 
-Voir la section [Prérequis : clé API](#prérequis--clé-api-materials-project) ci-dessus.
-Requis pour `qe-bridge` ; optionnel pour `qe-plot` et `qe-tcad` (données locales).
+Sous Docker **sans** `-it`, il n'y a **pas de prompt Y/N**. Il faut préciser `--epsilon` :
 
-### 3. Lancer les commandes
+| Valeur | Rôle |
+|--------|------|
+| `empiric` | **Recommandé** — run rapide (ε empirique) |
+| `compute` | Force le calcul `epsilon.x` (long / disque) |
+| `mp` | Valeur Materials Project |
+| `ask` | Prompt interactif — **uniquement avec `-it`** |
+
+### 4. Lancer les commandes
 
 Depuis le dossier de travail (le dossier courant est monté dans `/data`) :
 
-**Linux / macOS :**
+**Linux / macOS (bash) :**
 
 ```bash
-# Pipeline QE → TCAD
+# Pipeline QE → TCAD (recommandé : empiric = rapide)
 docker run --rm -e MP_API_KEY -v "$PWD:/data" -w /data \
-  lauryneelv/qe-to-tcad:0.2.4 SiGe
+  lauryneelv/qe-to-tcad:latest SiGe --epsilon empiric
+
+# Forcer le calcul epsilon.x (long / disque)
+docker run --rm -e MP_API_KEY -v "$PWD:/data" -w /data \
+  lauryneelv/qe-to-tcad:latest SiGe --epsilon compute
+
+# Prompt interactif Y/N (nécessite -it)
+docker run --rm -it -e MP_API_KEY -v "$PWD:/data" -w /data \
+  lauryneelv/qe-to-tcad:latest SiGe
 
 # Tracé de la fonction diélectrique ε(ω)
 docker run --rm -v "$PWD:/data" -w /data \
-  --entrypoint qe-plot lauryneelv/qe-to-tcad:0.2.4 SiGe
+  --entrypoint qe-plot lauryneelv/qe-to-tcad:latest SiGe
 
 # Simulation diode 1D
 docker run --rm -v "$PWD:/data" -w /data \
-  --entrypoint qe-tcad lauryneelv/qe-to-tcad:0.2.4 SiGe diode
+  --entrypoint qe-tcad lauryneelv/qe-to-tcad:latest SiGe diode
 
 # Simulation transistor 1D
 docker run --rm -v "$PWD:/data" -w /data \
-  --entrypoint qe-tcad lauryneelv/qe-to-tcad:0.2.4 SiGe transistor
+  --entrypoint qe-tcad lauryneelv/qe-to-tcad:latest SiGe transistor
 ```
 
 **Windows (PowerShell) :**
 
 ```powershell
+$env:MP_API_KEY = "your_32_char_key"
+docker pull lauryneelv/qe-to-tcad:latest
+
 docker run --rm -e MP_API_KEY -v "${PWD}:/data" -w /data `
-  lauryneelv/qe-to-tcad:0.2.4 SiGe
+  lauryneelv/qe-to-tcad:latest SiGe --epsilon empiric
 
 docker run --rm -v "${PWD}:/data" -w /data `
-  --entrypoint qe-plot lauryneelv/qe-to-tcad:0.2.4 SiGe
+  --entrypoint qe-plot lauryneelv/qe-to-tcad:latest SiGe
 
 docker run --rm -v "${PWD}:/data" -w /data `
-  --entrypoint qe-tcad lauryneelv/qe-to-tcad:0.2.4 SiGe diode
+  --entrypoint qe-tcad lauryneelv/qe-to-tcad:latest SiGe diode
 
 docker run --rm -v "${PWD}:/data" -w /data `
-  --entrypoint qe-tcad lauryneelv/qe-to-tcad:0.2.4 SiGe transistor
+  --entrypoint qe-tcad lauryneelv/qe-to-tcad:latest SiGe transistor
 ```
 
-:::tip Windows
-Avec Docker Desktop, utilisez PowerShell. Si le montage du volume échoue, remplacez `"$PWD:/data"` / `"${PWD}:/data"` par un chemin absolu, par exemple `C:\Users\Vous\qe_runs:/data`.
+:::tip Notes Docker
+- **`sudo docker`** : `sudo` ne conserve pas un `export` préalable — écrivez `-e MP_API_KEY="votre_clé"` dans la commande.
+- **Mac Apple Silicon** : si l'image ne démarre pas, ajoutez `--platform linux/amd64`.
+- Si le montage du volume échoue sous Windows, utilisez un chemin absolu, ex. `C:\Users\Vous\qe_runs:/data`.
 :::
 
 | Commande | Rôle | `MP_API_KEY` |

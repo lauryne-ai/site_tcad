@@ -29,8 +29,8 @@ qe-bridge <chemical_formula> [options]
 
 | Option | Description |
 |--------|-------------|
+| `--epsilon MODE` | ε source: `empiric` (fast, recommended), `compute` (`epsilon.x`), `mp` (Materials Project), `ask` (interactive prompt) |
 | `--pw PATH` | Path to `pw.x` |
-| `--epsilon PATH` | Path to `epsilon.x` |
 | `--nproc N` | Number of MPI processes |
 | `--qe-path PATH` | QE bin directory |
 | `--help` | Show help |
@@ -38,14 +38,14 @@ qe-bridge <chemical_formula> [options]
 ### Examples
 
 ```bash
-qe-bridge C
-qe-bridge Si --nproc 8
+qe-bridge SiGe --epsilon empiric
+qe-bridge Si --nproc 8 --epsilon compute
 qe-bridge Ge --pw /opt/qe/bin/pw.x
-qe-bridge SiGe
 ```
 
-:::info API key
-`qe-bridge` requires `MP_API_KEY` (see [Installation](/docs/setup/installation#materials-project-api-key-required)).
+:::info API key and Docker
+`qe-bridge` requires `MP_API_KEY` (see [Installation](/docs/setup/installation#prerequisite-materials-project-api-key)).
+Under Docker **without** `-it`, always pass `--epsilon` (no Y/N prompt).
 :::
 
 ## `qe-plot`

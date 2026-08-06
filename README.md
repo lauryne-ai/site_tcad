@@ -65,7 +65,7 @@ npm run serve
 Documentation des commandes `qe-bridge`, `qe-plot` et `qe-tcad` :
 
 - PyPI : `pip install 'qe-to-tcad[tcad]'`
-- Docker : `lauryneelv/qe-to-tcad:0.2.4`
+- Docker : `lauryneelv/qe-to-tcad:latest` (`docker pull` puis `--epsilon empiric` sans `-it`)
 - Clé API : chaque utilisateur crée la sienne sur [Materials Project](https://next-gen.materialsproject.org/) (`export MP_API_KEY=...`)
 
 Voir [Installation](https://lauryne-ai.github.io/site_tcad/docs/setup/installation) et [CLI](https://lauryne-ai.github.io/site_tcad/docs/reference/cli).
