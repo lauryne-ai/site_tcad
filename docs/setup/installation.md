@@ -5,7 +5,7 @@ title: Installation
 
 # Installation
 
-Ce guide couvre l'installation de **The APE Bridge** et de ses dépendances système (Python, Quantum ESPRESSO, MPI).
+Ce guide couvre l'installation de **QE-to-TCAD** et de ses dépendances système (Python, Quantum ESPRESSO, MPI).
 
 ## Prérequis : clé API Materials Project
 

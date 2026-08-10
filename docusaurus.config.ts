@@ -3,13 +3,13 @@ import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
-  title: 'The APE Bridge',
+  title: 'QE-to-TCAD',
   tagline: 'Pipeline automatisé Quantum ESPRESSO → TCAD',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/favicon.svg',
 
-  url: 'https://lauryne-ai.github.io',
+  url: 'https://quantum-arise-acad.github.io',
   baseUrl: '/site_tcad/',
-  organizationName: 'lauryne-ai',
+  organizationName: 'Quantum-ARISE-Acad',
   projectName: 'site_tcad',
   onBrokenLinks: 'throw',
 
@@ -56,7 +56,7 @@ const config: Config = {
           sidebarPath: './sidebars.ts',
           routeBasePath: 'docs',
           editUrl:
-            'https://github.com/lauryne-ai/site_tcad/tree/main/',
+            'https://github.com/Quantum-ARISE-Acad/site_tcad/tree/main/',
         },
         blog: false,
         theme: {
@@ -73,9 +73,9 @@ const config: Config = {
       respectPrefersColorScheme: true,
     },
     navbar: {
-      title: 'APE Bridge',
+      title: 'QE-to-TCAD',
       logo: {
-        alt: 'APE Bridge Logo',
+        alt: 'QE-to-TCAD',
         src: 'img/logo.svg',
       },
       items: [
@@ -158,7 +158,7 @@ const config: Config = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} The APE Bridge — MIT License`,
+      copyright: `Copyright © ${new Date().getFullYear()} QE-to-TCAD — MIT License`,
     },
     prism: {
       theme: prismThemes.github,

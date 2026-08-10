@@ -1,8 +1,8 @@
-# The APE Bridge — Site documentation
+# QE-to-TCAD — Site documentation
 
 Site de documentation utilisateur pour le projet [QE_to_TCAD](https://github.com/LauryneEklou/QE_to_TCAD), construit avec [Docusaurus](https://docusaurus.io/).
 
-**URL publique (après déploiement) :** [lauryne-ai.github.io/site_tcad](https://lauryne-ai.github.io/site_tcad/)
+**URL publique (après déploiement) :** [quantum-arise-acad.github.io/site_tcad](https://quantum-arise-acad.github.io/site_tcad/)
 
 ## Développement local
 
@@ -53,10 +53,10 @@ npm run serve
 
 ## Déploiement GitHub Pages
 
-1. Pousser ce dépôt sur `https://github.com/lauryne-ai/site_tcad`
+1. Pousser ce dépôt sur `https://github.com/Quantum-ARISE-Acad/site_tcad`
 2. **Settings → Pages → Build and deployment → Source : GitHub Actions**
 3. Le workflow `.github/workflows/deploy-docs.yml` build et publie le site à chaque push sur `main`
-4. URL finale : [https://lauryne-ai.github.io/site_tcad/](https://lauryne-ai.github.io/site_tcad/)
+4. URL finale : [https://quantum-arise-acad.github.io/site_tcad/](https://quantum-arise-acad.github.io/site_tcad/)
 5. Une fois déployé, le menu **Français / English** fonctionne sur le site en ligne
 
 ## Package utilisateur (PyPI / Docker)
@@ -67,7 +67,7 @@ Documentation des commandes `qe-bridge`, `qe-plot` et `qe-tcad` :
 - Docker : `lauryneelv/qe-to-tcad:latest` (`docker pull` puis `--epsilon empiric` sans `-it`)
 - Clé API : chaque utilisateur crée la sienne sur [Materials Project](https://next-gen.materialsproject.org/) (`export MP_API_KEY=...`)
 
-Voir [Installation](https://lauryne-ai.github.io/site_tcad/docs/setup/installation) et [CLI](https://lauryne-ai.github.io/site_tcad/docs/reference/cli).
+Voir [Installation](https://quantum-arise-acad.github.io/site_tcad/docs/setup/installation) et [CLI](https://quantum-arise-acad.github.io/site_tcad/docs/reference/cli).
 
 ## Structure
 

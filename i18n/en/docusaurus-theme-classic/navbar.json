@@ -1,6 +1,6 @@
 {
   "title": {
-    "message": "APE Bridge",
+    "message": "QE-to-TCAD",
     "description": "The title in the navbar"
   },
   "item.label.Documentation": {
@@ -32,7 +32,7 @@
     "description": "Navbar item with label GitHub"
   },
   "logo.alt": {
-    "message": "APE Bridge Logo",
+    "message": "QE-to-TCAD",
     "description": "The alt text of navbar logo"
   }
 }

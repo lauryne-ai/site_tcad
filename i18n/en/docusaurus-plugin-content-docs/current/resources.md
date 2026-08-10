@@ -40,7 +40,7 @@ Useful links for DFT, Quantum ESPRESSO and TCAD device engineering.
 
 ```bibtex
 @software{apebridge2024,
-  title={The APE Bridge: Automated QE-to-TCAD Pipeline},
+  title={QE-to-TCAD: Automated Quantum ESPRESSO to TCAD Pipeline},
   author={Lauryne},
   year={2024},
   url={https://github.com/LauryneEklou/QE_to_TCAD}

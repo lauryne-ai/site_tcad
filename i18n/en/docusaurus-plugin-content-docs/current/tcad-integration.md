@@ -5,7 +5,7 @@ title: TCAD Integration
 
 # TCAD integration
 
-The APE Bridge exports material properties in a JSON format that device simulators can consume directly.
+QE-to-TCAD exports material properties in a JSON format that device simulators can consume directly.
 
 ## Target simulators
 

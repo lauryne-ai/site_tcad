@@ -5,7 +5,7 @@ title: Formats de données
 
 # Formats de données
 
-The APE Bridge produit des fichiers JSON structurés dans `parsed_data/`, prêts pour l'import dans les simulateurs TCAD.
+QE-to-TCAD produit des fichiers JSON structurés dans `parsed_data/`, prêts pour l'import dans les simulateurs TCAD.
 
 ## JSON électronique (`parsed_data/Si.json`)
 

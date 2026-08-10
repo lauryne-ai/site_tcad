@@ -5,7 +5,7 @@ title: Variables d'environnement
 
 # Variables d'environnement
 
-The APE Bridge lit les variables depuis le fichier `.env` (via `python-dotenv`) ou l'environnement système.
+QE-to-TCAD lit les variables depuis le fichier `.env` (via `python-dotenv`) ou l'environnement système.
 
 ## Fichier `.env` (exemple local)
 

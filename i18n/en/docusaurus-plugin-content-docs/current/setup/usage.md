@@ -5,7 +5,7 @@ title: Usage
 
 # Usage
 
-This guide covers common use cases for **The APE Bridge**.
+This guide covers common use cases for **QE-to-TCAD**.
 
 ## Full workflow (PyPI)
 
