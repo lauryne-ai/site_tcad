@@ -7,10 +7,11 @@ const config: Config = {
   tagline: 'Pipeline automatisé Quantum ESPRESSO → TCAD',
   favicon: 'img/favicon.svg',
 
-  url: 'https://quantum-arise-acad.github.io',
-  baseUrl: '/site_tcad/',
-  organizationName: 'Quantum-ARISE-Acad',
-  projectName: 'site_tcad',
+  // Allow dual deploys: org project Pages (/site_tcad/) and personal Pages
+  url: process.env.DOCUSAURUS_URL ?? 'https://quantum-arise-acad.github.io',
+  baseUrl: process.env.DOCUSAURUS_BASE_URL ?? '/site_tcad/',
+  organizationName: process.env.DOCUSAURUS_ORG ?? 'Quantum-ARISE-Acad',
+  projectName: process.env.DOCUSAURUS_PROJECT ?? 'site_tcad',
   onBrokenLinks: 'throw',
 
   i18n: {
@@ -56,6 +57,7 @@ const config: Config = {
           sidebarPath: './sidebars.ts',
           routeBasePath: 'docs',
           editUrl:
+            process.env.DOCUSAURUS_EDIT_URL ??
             'https://github.com/Quantum-ARISE-Acad/site_tcad/tree/main/',
         },
         blog: false,

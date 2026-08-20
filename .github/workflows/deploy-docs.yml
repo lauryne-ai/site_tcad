@@ -34,6 +34,12 @@ jobs:
         run: npm ci
 
       - name: Build website
+        env:
+          DOCUSAURUS_URL: ${{ github.repository_owner == 'lauryne-ai' && 'https://lauryne-ai.github.io' || 'https://quantum-arise-acad.github.io' }}
+          DOCUSAURUS_BASE_URL: /site_tcad/
+          DOCUSAURUS_ORG: ${{ github.repository_owner }}
+          DOCUSAURUS_PROJECT: site_tcad
+          DOCUSAURUS_EDIT_URL: https://github.com/${{ github.repository }}/tree/main/
         run: npm run build
 
       - name: Upload Pages artifact
